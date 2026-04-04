@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather | dhanur.me</title>
+    <!-- Configure Nav -->
+    <script>
+    window.SiteNavConfig = {
+        mode: "navbar",
+        nav: [{ name: "Home", url: "https://dhanur.me/", icon: "fa-solid fa-house" }],
+        sidebarNav: [],
+        activePath: window.location.pathname,
+        badge: { text: "INFO", class: "badge-info" },
+        showSearch: false,
+        showAppsGrid: true,
+        showThemeToggle: true
+    };
+    </script>
+    <script type="module" src="https://dhanur.me/js/shell.js"></script>
+</head>
+<body>
+    <main class="w-full max-w-md mx-auto p-4 flex flex-col items-center justify-center min-h-[calc(100vh-6rem)]">
+        <div class="dui-surface w-full">
+            <div class="dui-surface-body p-6">
+                <!-- Header -->
+                <div class="text-center space-y-2 mb-6">
+                    <i class="fa-solid fa-cloud-sun text-6xl text-sky-400"></i>
+                    <h1 class="text-3xl font-extrabold text-base-content tracking-tight uppercase">24°C</h1>
+                    <p class="text-base-content/60 font-semibold tracking-wider font-mono text-sm">CHANDIGARH, IN</p>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-base-200/50 border border-base-content/10 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-base-content/40 font-bold uppercase tracking-widest mb-1">Humidity</span>
+                        <span class="text-lg font-bold text-base-content">64%</span>
+                    </div>
+                    <div class="bg-base-200/50 border border-base-content/10 p-4 rounded-xl flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-base-content/40 font-bold uppercase tracking-widest mb-1">Wind</span>
+                        <span class="text-lg font-bold text-base-content">12 km/h</span>
+                    </div>
+                </div>
+                <div class="mt-6 pt-4 border-t border-base-content/10 flex justify-center">
+                    <button class="dui-btn dui-btn-primary w-full">
+                        <i class="fa-solid fa-location-crosshairs mr-2"></i> Update Location
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
