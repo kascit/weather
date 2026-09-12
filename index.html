@@ -3,49 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather | dhanur.me</title>
-    <!-- Configure Nav -->
+    <title>Weather — Minimalist Live Weather Dashboard | dhanur.me</title>
+    <meta name="description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <link rel="canonical" href="https://dhanur.me/stuff/weather/" />
+    <link rel="icon" href="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/icons/favicon.svg" type="image/svg+xml" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dhanur.me/stuff/weather/" />
+    <meta property="og:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
+    <meta property="og:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/images/branding/logo-light.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
+    <meta name="twitter:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+
+    <!-- Styling -->
+    <link rel="stylesheet" href="https://dhanur.me/css/dui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <!-- 1. The Configuration Object -->
     <script>
     window.SiteNavConfig = {
         mode: "navbar",
-        nav: [{ name: "Home", url: "https://dhanur.me/", icon: "fa-solid fa-house" }],
+        nav: [
+            { name: "Home", url: "https://dhanur.me/", icon: "fa-solid fa-house" },
+            { name: "Stuff", url: "https://dhanur.me/stuff/", icon: "fa-solid fa-shapes" }
+        ],
         sidebarNav: [],
-        activePath: window.location.pathname,
+        activePath: "/stuff/weather/",
         badge: { text: "INFO", class: "badge-info" },
         showSearch: false,
         showAppsGrid: true,
-        showThemeToggle: true
+        showThemeToggle: true,
+        showAccountButton: true,
+        enablePwa: false,
+        favicon: false
     };
     </script>
-    <script type="module" src="https://dhanur.me/js/shell.js"></script>
+    <script src="https://dhanur.me/js/shell.min.js" defer></script>
 </head>
-<body>
-    <main class="w-full max-w-md mx-auto p-4 flex flex-col items-center justify-center min-h-[calc(100vh-6rem)]">
-        <div class="dui-surface w-full">
+<body class="min-h-screen bg-base-100 text-base-content antialiased pt-20">
+    <div class="navbar site-topbar fixed top-0 left-0 right-0 z-50 h-16 border-b border-base-content/10 bg-base-100/80 backdrop-blur-md">
+        <div class="flex-none lg:hidden">
+            <button id="shell-mobile-toggle" type="button" aria-label="Open menu" class="btn btn-ghost btn-circle btn-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div class="flex-1 flex justify-center items-center lg:flex lg:justify-start">
+            <a href="https://dhanur.me/" class="btn btn-ghost hover:bg-transparent hover:border-transparent normal-case text-xl font-bold text-base-content logo-firefly site-logo-link">
+                <div class="relative h-18 flex items-center">
+                    <picture>
+                        <img src="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/images/branding/logo-light.png" alt="~/dhanur" class="h-18 w-auto p-[15px] logo-dark" sizes="200px" />
+                    </picture>
+                    <picture class="absolute inset-0 flex items-center">
+                        <img src="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/images/branding/logo-dark.png" alt="~/dhanur" class="h-18 w-auto p-[15px] logo-light" sizes="200px" />
+                    </picture>
+                </div>
+            </a>
+        </div>
+        <div class="flex-none hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 items-center">
+                <li data-nav-chrome="apps" class="ml-1">
+                    <div class="relative p-0" data-dropdown="apps">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-square tooltip tooltip-bottom" data-tooltip-label="Apps" aria-label="Apps">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                        </div>
+                        <div class="dropdown-panel z-50 mt-2 p-4 bg-base-100 border border-base-content/10 rounded-box w-64 right-0 mr-2 md:mr-4">
+                            <div class="grid grid-cols-3 gap-2" data-app-menu-grid="desktop">
+                                <div class="col-span-3 flex justify-center py-4 opacity-50"><span class="loading loading-spinner loading-sm"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li data-nav-chrome="account" class="ml-1">
+                    <div class="relative p-0" data-dropdown="account">
+                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle tooltip tooltip-bottom" data-tooltip-label="Account" aria-label="Account">
+                            <div data-auth="nav-guest-avatar" class="w-9 h-9 rounded-full bg-base-300 flex items-center justify-center">
+                                <i class="fa-solid fa-user text-base-content/50 text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown-panel z-50 mt-2 bg-base-100 border border-base-content/10 rounded-box w-64 right-0 mr-2 md:mr-4 overflow-hidden">
+                            <div class="px-3 pt-3 pb-2 border-b border-base-content/10 cursor-default select-none">
+                                <div class="font-semibold text-sm">Ecosystem Account</div>
+                                <div class="text-xs opacity-60">Sign in for cross-app synchronization</div>
+                            </div>
+                            <ul class="menu p-2">
+                                <li data-nav-chrome="theme">
+                                    <div class="flex items-center gap-2.5 px-2.5 py-2">
+                                        <i class="fa-solid fa-circle-half-stroke w-4 text-center opacity-60"></i>
+                                        <div id="theme-toggle" class="theme-switcher w-full bg-base-300/70 text-xs font-medium">
+                                            <button data-theme-mode="light" class="theme-switcher-btn rounded-md px-2 py-1.5"><i class="fa-solid fa-sun mr-1"></i>Light</button>
+                                            <button data-theme-mode="dark" class="theme-switcher-btn rounded-md px-2 py-1.5"><i class="fa-solid fa-moon mr-1"></i>Dark</button>
+                                            <button data-theme-mode="auto" class="theme-switcher-btn rounded-md px-2 py-1.5"><i class="fa-solid fa-circle-half-stroke mr-1"></i>Auto</button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a class="flex items-center gap-3" href="https://auth.dhanur.me/"><i class="fa-solid fa-right-to-bracket w-4 text-center"></i><span>Sign In</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Mobile Panel -->
+    <div id="shell-mobile-panel" class="fixed inset-0 z-[100] hidden" data-shell-mobile-panel>
+        <div class="absolute inset-0 bg-black/50" data-shell-mobile-backdrop></div>
+        <div class="absolute top-0 left-0 bottom-0 w-72 bg-base-100 shadow-2xl flex flex-col overflow-y-auto" data-shell-mobile-drawer>
+            <div class="flex items-center justify-between px-4 py-3 border-b border-base-content/10">
+                <a href="https://dhanur.me/" class="font-bold text-lg text-base-content">dhanur.me</a>
+                <button type="button" class="btn btn-ghost btn-circle btn-sm" data-shell-mobile-close aria-label="Close menu">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="px-4 py-3 border-b border-base-content/10">
+                <a href="/stuff/" class="btn btn-sm btn-ghost w-full justify-start"><i class="fa-solid fa-arrow-left mr-2"></i>Back to Stuff</a>
+            </div>
+        </div>
+    </div>
+
+    <main class="w-full max-w-md mx-auto p-4 flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
+        <!-- Breadcrumbs -->
+        <div class="w-full flex items-center justify-between text-xs text-base-content/60 mb-3 px-1">
+            <div class="flex items-center gap-2">
+                <a href="https://dhanur.me/" class="hover:text-base-content no-underline">Home</a>
+                <span>/</span>
+                <a href="/stuff/" class="hover:text-base-content no-underline">Stuff</a>
+                <span>/</span>
+                <span class="text-base-content font-medium">Weather</span>
+            </div>
+            <a href="/stuff/" class="hover:text-primary no-underline flex items-center gap-1 text-[11px]">
+                <i class="fa-solid fa-grid-2"></i> All Tools
+            </a>
+        </div>
+
+        <div class="dui-surface w-full shadow-lg border border-base-content/10 rounded-2xl overflow-hidden backdrop-blur-xl">
             <div class="dui-surface-body p-6">
                 <!-- Header -->
                 <div class="text-center space-y-2 mb-6">
-                    <i class="fa-solid fa-cloud-sun text-6xl text-sky-400"></i>
-                    <h1 class="text-3xl font-extrabold text-base-content tracking-tight uppercase">24°C</h1>
-                    <p class="text-base-content/60 font-semibold tracking-wider font-mono text-sm">CHANDIGARH, IN</p>
+                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 mb-2">
+                        <i id="weather-icon" class="fa-solid fa-cloud-sun text-4xl"></i>
+                    </div>
+                    <h1 id="temp" class="text-4xl font-extrabold text-base-content tracking-tight uppercase">24°C</h1>
+                    <p id="location" class="text-base-content/60 font-semibold tracking-wider font-mono text-xs uppercase">CHANDIGARH, IN</p>
+                    <p id="condition" class="text-xs text-base-content/50 font-medium capitalize">Partly Cloudy</p>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-base-200/50 border border-base-content/10 p-4 rounded-xl flex flex-col items-center justify-center">
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-base-200/50 border border-base-content/10 p-3.5 rounded-xl flex flex-col items-center justify-center">
                         <span class="text-[10px] text-base-content/40 font-bold uppercase tracking-widest mb-1">Humidity</span>
-                        <span class="text-lg font-bold text-base-content">64%</span>
+                        <span id="humidity" class="text-lg font-bold text-base-content">64%</span>
                     </div>
-                    <div class="bg-base-200/50 border border-base-content/10 p-4 rounded-xl flex flex-col items-center justify-center">
-                        <span class="text-[10px] text-base-content/40 font-bold uppercase tracking-widest mb-1">Wind</span>
-                        <span class="text-lg font-bold text-base-content">12 km/h</span>
+                    <div class="bg-base-200/50 border border-base-content/10 p-3.5 rounded-xl flex flex-col items-center justify-center">
+                        <span class="text-[10px] text-base-content/40 font-bold uppercase tracking-widest mb-1">Wind Speed</span>
+                        <span id="wind" class="text-lg font-bold text-base-content">12 km/h</span>
                     </div>
                 </div>
-                <div class="mt-6 pt-4 border-t border-base-content/10 flex justify-center">
-                    <button class="dui-btn dui-btn-primary w-full">
-                        <i class="fa-solid fa-location-crosshairs mr-2"></i> Update Location
+
+                <div class="mt-6 pt-4 border-t border-base-content/10 flex flex-col gap-2">
+                    <button type="button" id="loc-btn" class="dui-btn dui-btn-primary w-full" onclick="updateGeoLocation()">
+                        <i class="fa-solid fa-location-crosshairs mr-2"></i> Locate Me
                     </button>
+                    <p id="status-msg" class="text-[11px] text-center text-base-content/40 h-4"></p>
                 </div>
             </div>
         </div>
+
+        <footer class="mt-8 text-center text-xs text-base-content/40">
+            <p>Part of the <a href="https://dhanur.me/" class="underline hover:text-base-content">dhanur.me</a> ecosystem</p>
+        </footer>
     </main>
+
+    <script>
+        function updateWeather(lat, lon, locName) {
+            const status = document.getElementById('status-msg');
+            status.textContent = 'Fetching meteorological metrics...';
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`)
+                .then(r => r.json())
+                .then(d => {
+                    const c = d.current;
+                    document.getElementById('temp').textContent = Math.round(c.temperature_2m) + '°C';
+                    document.getElementById('humidity').textContent = c.relative_humidity_2m + '%';
+                    document.getElementById('wind').textContent = Math.round(c.wind_speed_10m) + ' km/h';
+                    document.getElementById('location').textContent = locName;
+                    
+                    // Code mapping
+                    const icon = document.getElementById('weather-icon');
+                    const cond = document.getElementById('condition');
+                    const code = c.weather_code;
+                    if (code === 0) { icon.className = 'fa-solid fa-sun text-4xl text-amber-400'; cond.textContent = 'Clear Sky'; }
+                    else if (code <= 3) { icon.className = 'fa-solid fa-cloud-sun text-4xl text-sky-400'; cond.textContent = 'Partly Cloudy'; }
+                    else if (code <= 48) { icon.className = 'fa-solid fa-smog text-4xl text-slate-400'; cond.textContent = 'Foggy'; }
+                    else if (code <= 67) { icon.className = 'fa-solid fa-cloud-rain text-4xl text-blue-400'; cond.textContent = 'Rain'; }
+                    else if (code <= 77) { icon.className = 'fa-solid fa-snowflake text-4xl text-sky-200'; cond.textContent = 'Snow'; }
+                    else if (code <= 82) { icon.className = 'fa-solid fa-cloud-showers-heavy text-4xl text-blue-500'; cond.textContent = 'Heavy Showers'; }
+                    else { icon.className = 'fa-solid fa-bolt text-4xl text-purple-400'; cond.textContent = 'Thunderstorm'; }
+                    status.textContent = 'Updated just now';
+                })
+                .catch(() => {
+                    status.textContent = 'Using cached baseline data';
+                });
+        }
+
+        function updateGeoLocation() {
+            if (!navigator.geolocation) {
+                document.getElementById('status-msg').textContent = 'Geolocation not supported in browser';
+                return;
+            }
+            document.getElementById('status-msg').textContent = 'Detecting position...';
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    updateWeather(pos.coords.latitude, pos.coords.longitude, 'LOCAL METRICS');
+                },
+                (err) => {
+                    document.getElementById('status-msg').textContent = 'Location access denied, showing baseline';
+                }
+            );
+        }
+
+        // Initialize default
+        updateWeather(30.7333, 76.7794, 'CHANDIGARH, IN');
+    </script>
 </body>
 </html>
