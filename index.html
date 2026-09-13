@@ -8,8 +8,20 @@
     <link rel="canonical" href="https://dhanur.me/stuff/weather/" />
     <link rel="icon" href="https://dhanur.me/favicon.ico" />
 
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dhanur.me/stuff/weather/" />
+    <meta property="og:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
+    <meta property="og:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/images/branding/logo-light.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
+    <meta name="twitter:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+
     <!-- Styling -->
-    <link rel="stylesheet" href="https://dhanur.me/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://dhanur.me/css/font-awesome.subset.css" />
     <link rel="stylesheet" href="https://dhanur.me/css/dui.css" />
 
     <!-- 1. The Configuration Object -->
@@ -28,23 +40,30 @@
     </script>
     <script src="https://dhanur.me/js/shell.min.js" defer></script>
 </head>
-<body class="min-h-screen bg-base-100 text-base-content antialiased">
+<body class="bg-base-100 text-base-content antialiased min-h-screen">
     <header id="dhanur-shell"></header>
 
-    <main class="w-full max-w-md mx-auto p-4 flex flex-col items-center justify-center min-h-[calc(100vh-8rem)]">
+    <main class="eco-page eco-container eco-container-compact flex flex-col items-center justify-center min-h-[calc(100vh-5rem)]">
         <!-- Breadcrumbs -->
         <div class="w-full flex items-center justify-between text-xs text-base-content/60 mb-3 px-1">
             <div class="flex items-center gap-2">
                 <a href="https://dhanur.me/" class="hover:text-base-content no-underline">Home</a>
                 <span>/</span>
-                <a href="/stuff/" class="hover:text-base-content no-underline">Stuff</a>
+                <a href="https://dhanur.me/stuff/" class="hover:text-base-content no-underline">Stuff</a>
                 <span>/</span>
                 <span class="text-base-content font-medium">Weather</span>
             </div>
-            <a href="/stuff/" class="hover:text-primary no-underline flex items-center gap-1 text-[11px]">
-                <i class="fa-solid fa-grid-2"></i> All Tools
-            </a>
+            <div class="flex items-center gap-3">
+                <a href="https://dhanur.me/stuff/calculator/" class="hover:text-primary no-underline flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-calculator"></i> Calculator
+                </a>
+                <a href="https://dhanur.me/stuff/" class="hover:text-primary no-underline flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-shapes"></i> All Tools
+                </a>
+            </div>
         </div>
+
+        <h1 class="sr-only">Weather — Minimalist Live Weather Dashboard</h1>
 
         <div class="dui-surface w-full shadow-lg border border-base-content/10 rounded-2xl overflow-hidden backdrop-blur-xl">
             <div class="dui-surface-body p-6">
