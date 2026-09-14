@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather — Minimalist Live Weather Dashboard | dhanur.me</title>
-    <meta name="description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <title>Weather | dhanur.me</title>
+    <meta name="description" content="Live local weather conditions, temperature, humidity, and wind speed." />
     <link rel="canonical" href="https://dhanur.me/stuff/weather/" />
     <link rel="icon" href="https://dhanur.me/favicon.ico" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dhanur.me/stuff/weather/" />
-    <meta property="og:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
-    <meta property="og:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <meta property="og:title" content="Weather | dhanur.me" />
+    <meta property="og:description" content="Live local weather conditions, temperature, humidity, and wind speed." />
     <meta property="og:image" content="https://raw.githubusercontent.com/kascit/kascit.github.io/raw-mirror/images/branding/logo-light.png" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="Weather — Minimalist Live Weather Dashboard | dhanur.me" />
-    <meta name="twitter:description" content="Live local weather conditions, temperature, humidity, wind speed, and meteorological metrics dynamically resolved to your location." />
+    <meta name="twitter:title" content="Weather | dhanur.me" />
+    <meta name="twitter:description" content="Live local weather conditions, temperature, humidity, and wind speed." />
 
     <!-- Styling -->
     <link rel="stylesheet" href="https://dhanur.me/css/font-awesome.subset.css" />
@@ -97,15 +97,20 @@
             </div>
         </div>
 
-        <footer class="mt-8 text-center text-xs text-base-content/40">
-            <p>Part of the <a href="https://dhanur.me/" class="underline hover:text-base-content">dhanur.me</a> ecosystem</p>
+        <footer class="eco-footer w-full">
+            <span>&copy; <span id="year">2026</span> Dhanur Relhan</span>
+            <div class="flex items-center gap-4">
+                <a href="https://dhanur.me/" class="hover:text-base-content transition-colors">dhanur.me</a>
+                <a href="https://github.com/kascit/stuff" class="hover:text-base-content transition-colors" target="_blank" rel="noopener noreferrer">Source</a>
+                <span class="opacity-50 font-mono text-[11px]" data-deploy-date></span>
+            </div>
         </footer>
     </main>
 
     <script>
         function updateWeather(lat, lon, locName) {
             const status = document.getElementById('status-msg');
-            status.textContent = 'Fetching meteorological metrics...';
+            status.textContent = 'Fetching weather data...';
             fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code`)
                 .then(r => r.json())
                 .then(d => {
